@@ -1,24 +1,25 @@
 package edu.icet.project.employeeControl;
 
 import edu.icet.project.dto.Employee;
-import lombok.extern.slf4j.Slf4j;
+import edu.icet.project.entity.EmployeeEntity;
+import edu.icet.project.service.EmployeeService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 @RequestMapping("/emp")
+@RequiredArgsConstructor
 public class EmployeeController {
 
-    List<Employee> employeeList = new ArrayList<>();
-    @PostMapping("/add")
+
+    final EmployeeService service;
+    @PostMapping("add")
     public void addEmployee(@RequestBody Employee employee){
-        employeeList.add(employee);
+        service.addEmployee(employee);
     }
 
-    @GetMapping("/get")
-    public List<Employee> getEmployee(){
-        return employeeList;
+    @GetMapping("get")
+    public Iterable<EmployeeEntity> getEmployee(){
+        return service.getAll();
     }
 }
