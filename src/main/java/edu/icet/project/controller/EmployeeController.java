@@ -31,4 +31,9 @@ public class EmployeeController {
     public void deleteEmployee(@PathVariable String id){
         service.delete(id);
     }
+
+    @PostMapping("/update")  // or use PutMapping
+    public void update(@RequestBody Employee employee){
+        service.update(employee);
+    }
 }
